@@ -1,0 +1,18 @@
+{
+  "name": "hometask-docupace",
+  "version": "1.0.0",
+  "repository": "https://github.com/RSledevskis/hometask-docupace.git",
+  "author": "rsledevskis <rsledevskis@evolution.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "@types/node": "24.10.0"
+  },
+  "scripts": {
+    "install-browsers": "yarn playwright install",
+    "playwright:run": "yarn playwright test --config playwright.config.ts"
+  }
+}
