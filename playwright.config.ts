@@ -19,6 +19,8 @@ export default defineConfig({
         trace: {
             mode: "retain-on-first-failure",
         },
+        /* Default locator used across the project */
+        testIdAttribute: "data-test",
     },
 
     /* Configure projects for major browsers */
