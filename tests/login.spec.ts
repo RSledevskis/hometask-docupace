@@ -1,9 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../src/steps/LoginPage";
+import { openUrl } from "../src/utils/openUrl";
 
 test.describe("User login", () => {
     test("Should be able to login with valid credentials", async ({ page }) => {
-        await page.goto("https://www.saucedemo.com/");
+        await openUrl(page);
         const loginPage = new LoginPage(page);
         await loginPage.waitForLoginLogo();
         await loginPage.login("standard_user", "secret_sauce");
@@ -12,7 +13,7 @@ test.describe("User login", () => {
     });
 
     test("Shouldn't be able to login with invalid credentials", async ({ page }) => {
-        await page.goto("https://www.saucedemo.com/");
+        await openUrl(page);
         const loginPage = new LoginPage(page);
         await loginPage.waitForLoginLogo();
         await loginPage.login("locked_out_user", "secret_sauce");
