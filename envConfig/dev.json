@@ -1,0 +1,5 @@
+{
+    "baseUrl": "https://www.saucedemo.com/",
+    "timeout": 30000,
+    "dataVersion": "v1.0.0"
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "standard_user",
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "type": "valid",
+    "description": "Standard user with full access"
+  },
+  {
+    "id": "locked_out_user",
+    "username": "locked_out_user",
+    "password": "secret_sauce",
+    "type": "locked",
+    "description": "User that has been locked out"
+  }
+]
