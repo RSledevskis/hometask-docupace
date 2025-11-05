@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page, test } from "@playwright/test";
 
 export class LoginPage {
     public errorMessage: Locator;
@@ -16,12 +16,16 @@ export class LoginPage {
     }
 
     public async waitForLoginLogo(): Promise<void> {
-        await this.loginLogo.waitFor();
+        await test.step("Waits for Login Logo to appear", async () => {
+            await this.loginLogo.waitFor();
+        });
     }
 
     public async login(username: string, password: string): Promise<void> {
-        await this.userNameInput.fill(username);
-        await this.passwordInput.fill(password);
-        await this.loginButton.click();
+        await test.step("Enters credentials and clicks Login button", async () => {
+            await this.userNameInput.fill(username);
+            await this.passwordInput.fill(password);
+            await this.loginButton.click();
+        });
     }
 }

@@ -1,10 +1,13 @@
 import { defineConfig, devices } from "@playwright/test";
+import config from "./config";
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
     testDir: "./tests",
+    /* Timeout for each test */
+    timeout: config.timeout,
     /* Run tests in files in parallel */
     fullyParallel: true,
     /* No retries */
@@ -15,6 +18,8 @@ export default defineConfig({
     reporter: "html",
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
+        /* Base URL to use in actions like `await page.goto('/') */
+        baseURL: config.baseUrl,
         /* Record trace for the first run of each test, but not for retries. When test run passes, remove the recorded trace */
         trace: {
             mode: "retain-on-first-failure",
