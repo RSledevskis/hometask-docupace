@@ -78,3 +78,8 @@ These tools work together in the following sequence: Prettier has set of rules f
 Prettier is set as a rule for the linter that checks the code quality together with other rules defined in config.
 Husky triggers the `yarn lint` command on pre-commit hook.
 
+## License
+Copyright © [2025] [Rainers Sledevskis]
+
+This project was completed as part of a recruitment assignment.  
+No permission is granted to use, copy, modify, distribute, or create derivative works from this code or any part thereof for any purpose except evaluation as part of the hiring process.
