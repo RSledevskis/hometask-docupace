@@ -31,17 +31,28 @@ Each environment loads the appropriate configuration for base URLs and timeouts.
 2. Run tests using the command defined in `package.json` scripts
 
 ```bash
-# Run tests against the DEV environment (default) in headless mode with:
+# Run all tests against the DEV environment (default) in headless mode with:
 yarn playwright:run
 
-# Run tests against the DEV environment (default) in UI mode with:
+# Run all tests against the DEV environment (default) in UI mode with:
 yarn playwright:run --ui
 
-# Run tests against the test environment in headless mode with:
+# Run all tests against the test environment in headless mode with:
 ENV=test yarn playwright:run
 
-# Run tests against the test environment in UI mode with:
+# Run all tests against the test environment in UI mode with:
 ENV=test yarn playwright:run --ui
+```
+
+### How to filter out tests
+The project provides several projects setups based on the defined test scope via build-in Playwrights tags functionality
+
+```bash
+# Run '@smoke' defined test scope
+yarn playwright:run --grep smoke
+
+# Run '@regression' defined test scope
+yarn playwright:run --grep regression
 ```
 
 ### Test reports

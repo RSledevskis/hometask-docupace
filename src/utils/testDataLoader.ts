@@ -6,7 +6,7 @@ export interface UserCredentials {
     id: string;
     username: string;
     password: string;
-    type: "valid" | "locked";
+    type: "valid" | "locked" | "invalid";
     description: string;
 }
 
@@ -48,6 +48,11 @@ export class TestDataLoader {
         }
 
         return user;
+    }
+
+    getUsersByType(type: UserCredentials["type"]): UserCredentials[] {
+        const users = this.getUsers();
+        return users.filter((user) => user.type === type);
     }
 
     validateDataVersion(): void {
