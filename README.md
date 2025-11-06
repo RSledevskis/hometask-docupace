@@ -64,4 +64,17 @@ yarn playwright show-report
 
 ## Configuration
 - `playwright.config.ts` defines test settings such as browsers, retries, timeout and others.
-- Some configuration parts, like: 'baseUrl' and 'timeout' are configurable per environment through `./config/` directory
+- Some configuration parts, like: 'baseUrl', 'dataVersion', 'timeout' are configurable per environment through `./envConfig/` directory
+
+## Extra
+
+### Static code analysis
+The project has tools configured in order to statically analyse and validate the written code before it gets commited.
+1. ESLint: statically analyzes the code to quickly find problems
+2. Prettier: an assertive code formatter
+3. Husky: automatically triggers lint command once the commit is initiated and blocks the commit in case of errors
+
+These tools work together in the following sequence: Prettier has set of rules fot the code formatting.
+Prettier is set as a rule for the linter that checks the code quality together with other rules defined in config.
+Husky triggers the `yarn lint` command on pre-commit hook.
+
