@@ -12,5 +12,19 @@
     "password": "secret_sauce",
     "type": "locked",
     "description": "User that has been locked out"
+  },
+  {
+    "id": "problem_user",
+    "username": "problem_user",
+    "password": "secret_sauce",
+    "type": "valid",
+    "description": "User with UI issues"
+  },
+  {
+    "id": "invalid_user",
+    "username": "invalid_user",
+    "password": "wrong_password",
+    "type": "invalid",
+    "description": "Invalid credentials for negative tests"
   }
 ]

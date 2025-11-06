@@ -9,30 +9,51 @@ test.describe("User login", () => {
         testDataLoader.validateDataVersion();
     });
 
-    test("Should be able to login with valid credentials", async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const user = testDataLoader.getUserById("standard_user");
+    test.describe("Positive scenarios", { tag: "@smoke" }, () => {
+        const users = testDataLoader.getUsersByType("valid");
+        for (const user of users) {
+            test(`Should be able to login with ${user.id} credentials`, async ({ page }) => {
+                const loginPage = new LoginPage(page);
 
-        await openUrl(page);
-        await loginPage.waitForLoginLogo();
-        await loginPage.login(user.username, user.password);
+                await openUrl(page);
+                await loginPage.waitForLoginLogo();
+                await loginPage.login(user.username, user.password);
 
-        await expect(page.locator("[class='app_logo']")).toBeVisible({
-            timeout: WaitTime.TenSeconds,
-        });
+                await expect(page.locator("[class='app_logo']")).toBeVisible({
+                    timeout: WaitTime.TenSeconds,
+                });
+                await expect(page).toHaveURL(/inventory.html/);
+            });
+        }
     });
 
-    test("Shouldn't be able to login with locked out user", async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const user = testDataLoader.getUserById("locked_out_user");
+    test.describe("Negative scenarios", { tag: ["@smoke", "@regression"] }, () => {
+        test("Shouldn't be able to login with invalid credentials", async ({ page }) => {
+            const loginPage = new LoginPage(page);
+            const user = testDataLoader.getUserById("invalid_user");
 
-        await openUrl(page);
-        await loginPage.waitForLoginLogo();
-        await loginPage.login(user.username, user.password);
+            await openUrl(page);
+            await loginPage.waitForLoginLogo();
+            await loginPage.login(user.username, user.password);
 
-        await expect(loginPage.errorMessage).toHaveText(
-            "Epic sadface: Sorry, this user has been locked out.",
-            { timeout: WaitTime.TenSeconds },
-        );
+            await expect(loginPage.errorMessage).toHaveText(
+                "Epic sadface: Username and password do not match any user in this service",
+                { timeout: WaitTime.TenSeconds },
+            );
+        });
+
+        test("Shouldn't be able to login with locked out user", async ({ page }) => {
+            const loginPage = new LoginPage(page);
+            const user = testDataLoader.getUserById("locked_out_user");
+
+            await openUrl(page);
+            await loginPage.waitForLoginLogo();
+            await loginPage.login(user.username, user.password);
+
+            await expect(loginPage.errorMessage).toHaveText(
+                "Epic sadface: Sorry, this user has been locked out.",
+                { timeout: WaitTime.TenSeconds },
+            );
+        });
     });
 });

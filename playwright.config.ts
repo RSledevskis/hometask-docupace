@@ -28,40 +28,23 @@ export default defineConfig({
         testIdAttribute: "data-test",
     },
 
-    /* Configure projects for major browsers */
+    /* Configure projects for different test scopes */
     projects: [
         {
-            name: "chromium",
+            name: "all",
             use: { ...devices["Desktop Chrome"] },
         },
 
         {
-            name: "firefox",
-            use: { ...devices["Desktop Firefox"] },
+            name: "smoke",
+            testMatch: /regression/,
+            use: { ...devices["Desktop Chrome"] },
         },
 
         {
-            name: "webkit",
-            use: { ...devices["Desktop Safari"] },
+            name: "regression",
+            testMatch: /smoke/,
+            use: { ...devices["Desktop Chrome"] },
         },
-
-        /* Test against mobile viewports. */
-        // {
-        //   name: 'Mobile Chrome',
-        //   use: { ...devices['Pixel 5'] },
-        // },
-        // {
-        //   name: 'Mobile Safari',
-        //   use: { ...devices['iPhone 12'] },
-        // },
-
-        /* Test against branded browsers. */
-        // {
-        //   name: 'Microsoft Edge',
-        //   use: { ...devices['Desktop Edge'], channel: 'msedge' },     // },
-        // {
-        //   name: 'Google Chrome',
-        //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-        // },
     ],
 });
