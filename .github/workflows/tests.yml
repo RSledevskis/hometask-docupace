@@ -1,0 +1,63 @@
+name: Playwright Tests
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select environment'
+        required: true
+        default: 'DEV'
+        type: choice
+        options:
+          - DEV
+          - TEST
+      test_suite:
+        description: 'Select test suite (optional, leave empty for all tests)'
+        required: false
+        type: choice
+        options:
+          - all
+          - '@smoke'
+          - '@regression'
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: yarn ci
+
+      - name: Install Playwright Chromium Browser
+        run: yarn playwright install --with-deps chromium
+
+      - name: Validate configuration and test data
+        env:
+          ENV: ${{ github.event.inputs.environment }}
+        run: | 
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Test Suite: ${{ github.event.inputs.test_suite }}"
+
+      - name: Run Playwright tests
+        env:
+          ENV: ${{ github.event.inputs.environment }}
+        run: |
+          if [ "${{ github.event.inputs.test_suite }}" = "all"]; then
+            yarn playwright:run
+          else
+            yarn playwright:run --grep "${{ github.event.inputs.test_suite }}"
+          fi
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-${{ github.event.inputs.environment }}
+          path: playwright-report/
+          retention-days: 5
