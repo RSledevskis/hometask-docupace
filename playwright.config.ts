@@ -14,8 +14,8 @@ export default defineConfig({
     retries: 0,
     /* Two workers for the test execution */
     workers: 2,
-    /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-    reporter: "html",
+    /* Reporters to use. See https://playwright.dev/docs/test-reporters */
+    reporter: [["html"], ["github"]],
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
         /* Base URL to use in actions like `await page.goto('/') */
