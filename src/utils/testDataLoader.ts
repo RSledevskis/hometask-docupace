@@ -14,7 +14,7 @@ export class TestDataLoader {
     private usersCache: UserCredentials[] | null = null;
 
     private loadData<T>(dataType: string): T {
-        const fileName = `${dataType}.${env}.${config.dataVersion}.json`;
+        const fileName = `${dataType}.${env.toLowerCase()}.${config.dataVersion}.json`;
         const filePath = path.join(__dirname, "../test-data", fileName);
 
         if (!fs.existsSync(filePath)) {
