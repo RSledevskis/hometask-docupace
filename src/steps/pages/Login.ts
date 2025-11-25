@@ -1,6 +1,6 @@
 import { Locator, Page, test } from "@playwright/test";
 
-export class LoginPage {
+export class Login {
     public errorMessage: Locator;
     private userNameInput: Locator;
     private passwordInput: Locator;

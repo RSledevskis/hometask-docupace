@@ -66,6 +66,41 @@ yarn playwright show-report
 - `playwright.config.ts` defines test settings such as browsers, retries, timeout and others.
 - Some configuration parts, like: 'baseUrl', 'dataVersion', 'timeout' are configurable per environment through `./envConfig/` directory
 
+## Continuous Integration (CI) with GitHub Actions
+
+This project uses GitHub Actions for continuous integration and automated test execution.
+
+### Workflow Location
+The CI pipeline is defined in `.github/workflows/tests.yml`. All configuration and setup steps are managed directly in the repository.
+
+### Triggering Test Runs
+
+Test runs are triggered manually via the GitHub Actions tab using a Workflow Dispatch event. To start a test run:
+1. Go to GitHub repository's `Actions` tab.
+2. Select `Playwright Tests` workflow on the left.
+3. Click `Run workflow` button.
+4. Choose your desired environment (`DEV`, `TEST`) and (optionally) a specific test suite (`all`, `@smoke`, `@regression`).
+5. Click `Run workflow` to start the tests.
+
+### What happens in the pipeline
+
+Check out the latest code from the repository.
+
+- Check out the latest code from the repository.
+- Set up a Node.js environment.
+- Install the required project dependencies.
+- Install Playwright Chromium browser.
+- Execute tests for the selected environment and tag, if specified.
+- Upload the generated test report as an artifact for download and review.
+
+You can find and download the latest test report from the workflow run’s `Artifacts` section.
+
+## Test Reporting
+
+Test results are saved as HTML reports and can be downloaded from each workflow run’s `Artifacts` section for offline viewing.
+Additionally, the `github` reporter was added in order to clearly see the result of the pipeline execution through the log. 
+
+
 ## Extra
 
 ### Static code analysis
