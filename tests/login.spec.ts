@@ -9,7 +9,7 @@ test.describe("User login", () => {
         testDataLoader.validateDataVersion();
     });
 
-    test.describe("Positive scenarios", { tag: "@smoke" }, () => {
+    test.describe("Positive scenarios", { tag: ["@smoke", "@regression"] }, () => {
         const users = testDataLoader.getUsersByType("valid");
         for (const user of users) {
             test(`Should be able to login with ${user.id} credentials`, async ({ page }) => {
@@ -27,7 +27,7 @@ test.describe("User login", () => {
         }
     });
 
-    test.describe("Negative scenarios", { tag: ["@smoke", "@regression"] }, () => {
+    test.describe("Negative scenarios", { tag: "@regression" }, () => {
         test("Shouldn't be able to login with invalid credentials", async ({ page }) => {
             const loginPage = new LoginPage(page);
             const user = testDataLoader.getUserById("invalid_user");

@@ -17,9 +17,9 @@ cd hometask-docupace
 ```bash
 yarn install
 ```
-3. Install Playwright Browsers
+3. Install Playwright Chromium
 ```bash
-yarn install-browsers
+yarn playwright install --with-deps chromium
 ```
 
 ## Tests Execution
@@ -38,10 +38,10 @@ yarn playwright:run
 yarn playwright:run --ui
 
 # Run all tests against the test environment in headless mode with:
-ENV=test yarn playwright:run
+ENV=TEST yarn playwright:run
 
 # Run all tests against the test environment in UI mode with:
-ENV=test yarn playwright:run --ui
+ENV=TEST yarn playwright:run --ui
 ```
 
 ### How to filter out tests
